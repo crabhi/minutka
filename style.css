@@ -136,6 +136,34 @@ body[data-mode="overtime"] #overtime { display: flex; }
 .go-3 { --c: var(--c3); }
 .go-10 { --c: var(--c10); }
 
+.custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.custom input, .custom button {
+  font-family: 'Bungee', cursive;
+  font-size: 15px;
+  height: 34px;
+  border: 1px solid rgba(185, 176, 217, 0.35);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ink);
+}
+.custom input {
+  width: 5.2em;
+  padding: 0 8px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.custom input::placeholder { color: var(--muted); opacity: 0.6; }
+.custom input:focus { outline: none; border-color: var(--ink); }
+.custom input[aria-invalid="true"] { border-color: var(--c1); animation: shake 0.25s linear 2; }
+.custom button { padding: 0 12px; cursor: pointer; }
+.custom button:hover, .custom button:focus-visible { outline: none; border-color: var(--ink); background: rgba(255, 255, 255, 0.12); }
+
 .hint { margin: 0; color: var(--muted); font-size: 15px; }
 
 #marquee {

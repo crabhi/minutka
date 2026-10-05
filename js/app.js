@@ -10,6 +10,7 @@
   const qs = new URLSearchParams(location.search);
   const FINALE_S = 10;
   const LAST_KEY = 'minutka.last';
+  const CUSTOM_KEY = 'minutka.custom';
 
   const stage = $('#stage');
   const clockEl = $('#ot-clock');
@@ -44,10 +45,10 @@
   }
 
   // ---------------------------------------------------------------- run
-  function start(minutes) {
+  function start(seconds) {
     M.unlockAudio();
     stop();
-    const durMs = (Number(qs.get('dur')) || minutes * 60) * 1000;
+    const durMs = (Number(qs.get('dur')) || seconds) * 1000;
     const at = Number(qs.get('at')) || 0;
     setMode('run');
     M._fitAll();
@@ -209,17 +210,43 @@
   }
 
   document.querySelectorAll('[data-minutes]').forEach(btn => {
-    btn.addEventListener('click', () => start(Number(btn.dataset.minutes)));
+    btn.addEventListener('click', () => start(Number(btn.dataset.minutes) * 60));
   });
   $('#exit').addEventListener('click', stop);
   $('#overtime').addEventListener('click', stop);
   $('#fs').addEventListener('click', toggleFullscreen);
 
+  // Custom time: "MM:SS", or plain minutes. "." and "," also work as the separator,
+  // because phone number pads have no colon.
+  function parseTime(str) {
+    const m = /^(\d{0,3})(?:[:.,](\d{1,2}))?$/.exec(str.trim());
+    if (!m || (!m[1] && !m[2])) return 0;
+    const min = Number(m[1] || 0), sec = Number(m[2] || 0);
+    return sec < 60 ? min * 60 + sec : 0;
+  }
+
+  const customEl = $('#custom-time');
+  customEl.value = store.get(CUSTOM_KEY) || '';
+  customEl.addEventListener('input', () => customEl.removeAttribute('aria-invalid'));
+  $('#custom').addEventListener('submit', e => {
+    e.preventDefault();
+    const sec = parseTime(customEl.value);
+    if (!sec) {
+      customEl.setAttribute('aria-invalid', 'true');
+      customEl.focus();
+      return;
+    }
+    store.set(CUSTOM_KEY, customEl.value.trim());
+    customEl.blur();
+    start(sec);
+  });
+
   document.addEventListener('keydown', e => {
+    if (e.target === customEl) return;
     if (e.key === 'Escape') { stop(); return; }
     if (e.key === 'f' || e.key === 'F') { toggleFullscreen(); return; }
     if (!run) {
-      const map = { 1: 1, 3: 3, 0: 10 };
+      const map = { 1: 60, 3: 180, 0: 600 };
       if (e.key in map) start(map[e.key]);
     }
   });
@@ -239,5 +266,5 @@
   $('#count').textContent = M.anims.length;
 
   setMode('menu');
-  if (qs.get('autostart')) start(1);
+  if (qs.get('autostart')) start(60);
 })();

@@ -20,6 +20,11 @@
       <button class="go go-3" data-minutes="3"><b>3</b><small>minutes</small></button>
       <button class="go go-10" data-minutes="10"><b>10</b><small>minutes</small></button>
     </div>
+    <form id="custom" class="custom" novalidate>
+      <label for="custom-time">or</label>
+      <input id="custom-time" type="text" inputmode="decimal" placeholder="MM:SS" autocomplete="off" spellcheck="false" maxlength="6" title="Custom time, e.g. 5:00 or 0:45">
+      <button type="submit">Go</button>
+    </form>
     <p class="hint">A random animation every time. <kbd>F</kbd> fullscreen &middot; <kbd>Esc</kbd> back</p>
     <div id="marquee" aria-hidden="true"></div>
     <button id="fs" class="corner" title="Fullscreen (F)">&#x26F6;</button>
