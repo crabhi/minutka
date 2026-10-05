@@ -83,7 +83,6 @@
       errors: 0,
       raf: 0,
       watchdog: setInterval(checkPhase, 250),
-      lastMinute: 0,
       msgIndex: -1,
     };
     requestWakeLock();
@@ -186,26 +185,6 @@
       void msgEl.offsetWidth;
       msgEl.classList.add('pop');
     }
-    const minute = Math.floor(over / 60);
-    if (minute > r.lastMinute) {
-      r.lastMinute = minute;
-      sadTrombone(r.sfx);
-    }
-  }
-
-  // Every full minute over budget: wah, wah, wah, waaaah.
-  function sadTrombone(sfx) {
-    const notes = [['D4', 0.45], ['C#4', 0.45], ['C4', 0.45], ['B3', 1.6]];
-    let at = 0;
-    notes.forEach(([n, d], i) => {
-      sfx.voice({
-        f: M.note(n), at, dur: d, vol: 0.35, attack: 0.04, release: 0.2,
-        formants: [[600, 1, 4], [1000, 0.5, 5], [2400, 0.2, 6]],
-        vib: i === 3 ? { rate: 5, depth: 6 } : null,
-        to: i === 3 ? M.note('A#3') : null,
-      });
-      at += d;
-    });
   }
 
   // ---------------------------------------------------------------- wake lock

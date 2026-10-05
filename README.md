@@ -1,6 +1,6 @@
 # Minutka
 
-A silly timer for lightning talks. Open `index.html` and pick 1, 3 or 10 minutes. You get one of 20 random animations that shows progress without any numbers. When time is up, the animation plays its finale and a matching sound. After 10 seconds an "over budget" clock takes over and plays a sad trombone for every full minute over.
+A silly timer for lightning talks. Open `index.html` and pick 1, 3 or 10 minutes. You get one of 20 random animations that shows progress without any numbers. When time is up, the animation plays its finale and a matching sound. After 10 seconds a silent "over budget" clock takes over and gets more alarming the longer you run over.
 
 Plain HTML/CSS/JS, no build step, works from `file://`. three.js r128 is loaded from cdnjs for the 3D scenes. If it doesn't load, those three animations are skipped.
 
