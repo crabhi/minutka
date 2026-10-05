@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minutka</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-mode="menu">
+  <main id="menu">
+    <h1 class="title" aria-label="Minutka">
+      <span>M</span><span>i</span><span>n</span><span>u</span><span>t</span><span>k</span><span>a</span>
+    </h1>
+    <p class="tagline">a timer for lightning talks &middot; <b id="count">20</b> ways to run out of time</p>
+    <div class="buttons">
+      <button class="go go-1" data-minutes="1"><b>1</b><small>minute</small></button>
+      <button class="go go-3" data-minutes="3"><b>3</b><small>minutes</small></button>
+      <button class="go go-10" data-minutes="10"><b>10</b><small>minutes</small></button>
+    </div>
+    <p class="hint">A random animation every time. <kbd>F</kbd> fullscreen &middot; <kbd>Esc</kbd> back</p>
+    <div id="marquee" aria-hidden="true"></div>
+    <button id="fs" class="corner" title="Fullscreen (F)">&#x26F6;</button>
+  </main>
+
+  <div id="stage"></div>
+  <button id="exit" class="corner" title="Stop (Esc)">&times;</button>
+
+  <section id="overtime">
+    <div class="ot-label">over budget</div>
+    <div id="ot-clock">+0:10</div>
+    <div id="ot-msg"></div>
+    <div class="ot-foot">brought to you by <span id="ot-source"></span> &middot; click or <kbd>Esc</kbd> to finish</div>
+  </section>
+
+  <!-- three.js r128 is the last release with a classic (non-module) build; works from file://.
+       async: bad wifi must not block the menu; 3D animations are simply skipped until THREE exists. -->
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/core/minutka.js"></script>
+
+  <script src="js/anims/train.js"></script>
+  <script src="js/anims/bomb.js"></script>
+  <script src="js/anims/balloon.js"></script>
+  <script src="js/anims/shark.js"></script>
+  <script src="js/anims/chomper.js"></script>
+  <script src="js/anims/blocks.js"></script>
+  <script src="js/anims/sunset.js"></script>
+  <script src="js/anims/snail.js"></script>
+  <script src="js/anims/ufo.js"></script>
+  <script src="js/anims/cat.js"></script>
+  <script src="js/anims/popcorn.js"></script>
+  <script src="js/anims/penguin.js"></script>
+  <script src="js/anims/egg.js"></script>
+  <script src="js/anims/domino.js"></script>
+  <script src="js/anims/pizza.js"></script>
+  <script src="js/anims/duck.js"></script>
+  <script src="js/anims/rocket.js"></script>
+  <script src="js/anims/coaster.js"></script>
+  <script src="js/anims/disco.js"></script>
+  <script src="js/anims/volcano.js"></script>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
